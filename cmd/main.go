@@ -27,6 +27,7 @@ func main() {
 func appMain(ctx context.Context, wait func(), keeper *application.ServiceKeeper) error {
 	router := gin.Default()
 	logger := tools.NewLogger()
+	router.Use(tools.RateLimit())
 
 	initRouter(router)
 	server := &http.Server{Addr: "0.0.0.0:8080", Handler: router}
